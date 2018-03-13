@@ -1,0 +1,44 @@
+{
+data_barang: [
+{
+id_barang: "1",
+kode_barang: "WRT",
+nama_barang: "Wortel",
+id_kategori_barang: "3",
+id_unit_barang: "1",
+id_user: "0",
+inserted: "2015-05-11 06:46:19",
+deleted: "0"
+},
+{
+id_barang: "2",
+kode_barang: "Ice",
+nama_barang: "Es Batu",
+id_kategori_barang: "1",
+id_unit_barang: "3",
+id_user: "0",
+inserted: "2015-05-11 06:46:52",
+deleted: "0"
+},
+{
+id_barang: "3",
+kode_barang: "CK",
+nama_barang: "Coklat",
+id_kategori_barang: "1",
+id_unit_barang: "1",
+id_user: "0",
+inserted: "2015-05-11 06:48:44",
+deleted: "0"
+},
+{
+id_barang: "4",
+kode_barang: "12",
+nama_barang: "ice cream",
+id_kategori_barang: "2",
+id_unit_barang: "12",
+id_user: "1",
+inserted: "2015-05-11 20:39:34",
+deleted: "0"
+}
+]
+}

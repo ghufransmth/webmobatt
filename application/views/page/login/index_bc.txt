@@ -1,0 +1,117 @@
+<body class="gray-bg">
+
+    <div class="loginColumns animated fadeInDown">
+        <div class="row">
+
+            <div class="col-md-6">
+                <h2 class="font-bold">Welcome to HCMS</h2>
+
+                <!--<p style="text-align:left">
+                  Didirikan pada tahun 2005, PT Abadi Jaya Manunggal mulai memproduksi besi beton (beton neser) dengan produk meliputi besi beton polos dan ulir dengan variasi produk berukuran mulai 6 mm sampai dengan 12 mm. Setelah 10 tahun berkembang seiring dengan peningkatan permintaan produk terutama untuk wilayah jawa tengah dan kalimantan, di tahun 2016 ini PT Abadi Jaya Manunggal menargetkan total kapasitas produksi terpasang sebesar 20.000 ton beton.
+                </p>
+				<p>
+				Berlokasi di Nolokerto - Semarang, PT Abadi Jaya Manunggal melaksanakan kegiatan produksi dengan teknologi yang memenuhi standar tingkat nasional, hal ini dibuktikan dengan diraihnya beberapa penghargaan di bidang Industri, seperti SPPT SNI (Sertifikasi Produk Penggunaan Tanda Standar Nasional Indonesia) dan Business Indonesia Award 2012.
+				</p>-->
+				<!--<img src="<?php echo base_url() ?>assets/img/gambar.jpg" style="width:100%;height:100%">
+               -->
+			   <p>
+					HCMS PT Abadi Jaya Manunggal merupakan sebuah sistem berbasis pendataan karyawan. Data yang nantinya akan diolah yaitu data pelamar, data karyawan, data absensi dan data gaji karyawan
+			   </p>
+			   <p>
+				Didalam sistem ini perusahaan dapat melihat kinerja karyawan secara langsung, melalui sistem terpadu yang dapat berinteraksi langsung dengan mesin absensi
+			   </p>
+			   <p>
+				Sistem HCMS juga mengolah data gaji dari masing-masing karyawan, dan dapat melihat masa kerja karyawan
+			   </p>
+            </div>
+            <div class="col-md-6">
+                <div class="ibox-content">
+                    <form class="m-t" role="form" id="login">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Username" name="username" id="username"/>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" placeholder="Password" name="password" id="password"/>
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                       <!-- <a href="#">
+                            <small>Forgot password?</small>
+                        </a>
+						-->
+                        <p class="text-muted text-center">
+                            <small>Do not have an account?</small>
+                        </p>
+                        <!--<a class="btn btn-sm btn-white btn-block" href="register.html">Create an account</a>-->
+                    </form>
+                    <p class="m-t">
+                        <small><b>H</b>uman <b>C</b>apital <b>M</b>anagement <b>S</b>ystem &copy; 2016</small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                Copyright PT Abadi Jaya Manunggal
+            </div>
+            <div class="col-md-6 text-right">
+               <small>© 2016</small>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+  	<script>
+		$('#login').submit(function(e){
+			e.preventDefault();
+			formData = new FormData($(this)[0]);
+			$.ajax({
+				url 	: '<?php echo base_url() ?>index.php/login',
+				type	: 'POST',
+				data	: formData,
+				async	: false,
+				cache	: false,
+				processData : false,
+				contentType	: false,
+				success:function (data){
+				//console.log(data);
+					if(data.is_logged_in==true){
+							
+							var date	=new Date();
+							var time	=date.getMinutes();
+							var hours	=date.getHours();
+							
+							var time_expired=parseInt(time)+50;
+								if(time_expired > 60){
+									var time_expired_get=parseInt(time_expired)-60;
+									var time_expired_hours=parseInt(hours)+1;
+								}else if(time_expired==60) {
+									var time_expired_get=0;
+									var time_expired_hours=parseInt(hours)+1;
+								
+								}else{
+									var time_expired_get=time_expired;
+									var time_expired_hours=hours;
+								}
+						localStorage.setItem('data_user', JSON.stringify(data));
+						localStorage.setItem('time_expired', time_expired_get);
+						localStorage.setItem('time_expired_hours', time_expired_hours);
+						
+						
+						var usernamee = JSON.parse(localStorage.getItem('data_user'));
+						//console.log(usernamee.username);
+						//alert(usernamee.username);
+						location.href = "<?php echo base_url() ?>index.php/home";
+
+					}else{
+						alert('Username / password yang anda masukkan salah !!!');
+					}
+				}
+			})
+			return false;
+		})
+	</script>
+  </body>
+</html>

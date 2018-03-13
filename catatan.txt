@@ -1,0 +1,9 @@
+1.copy library curl pada codeigniter file sudah difolder
+2.aktifkan ekstensi curl pada php.ini
+
+
+keterangan
+
+1 =sakit
+2 =ijin
+3 =alpha
