@@ -59,7 +59,7 @@
 					"processing": true,
 					"ajax": '<?php echo base_url() ?>/index.php/delegated/get_data_delegated_view',
 					"columns": [
-							{ "data": "nama_user.0.first_name" },
+						{ "data": "nama_user.0.first_name" },
 						{ "data": "delegate_date" },
 						{ "data": "undelegate_date" },
 						

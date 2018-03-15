@@ -65,7 +65,6 @@
 					"ajax": '<?php echo base_url() ?>/index.php/data_ijin/get_data_ijin_approval',
 					"columns": [
 							{ "data": "nama_user.0.first_name" },
-					
 						{ "data": "start_date" },
 						{ "data": "end_date" },
 						{ "data": "data_ijin_list.0.reason_desc" },
@@ -167,19 +166,46 @@
 	
       url_edit = '<?php echo base_url()?>index.php/data_ijin/approval_ijin/'+id,
 						$.getJSON(url_edit, function (data){
-						sweetAlert({
-	                                                   title: "Berhasil!", 
-                                                        text: "Data Berhasil Diapprove!", 
-                                                        type: "success",
+							var approve = data.status;
+							if(approve == false){
+								sweetAlert({
+	                               	title: "Gagal Approval!", 
+                                    text: "Data Gagal Diapprove!", 
+                                    type: "warning",		
+									timer: 1200,
+                                                 	}
+								, function() {
+											location.reload();
+										}
+								);
+							}else{
+								sweetAlert({
+	                               	title: "Berhasil!", 
+                                    text: "Data Berhasil Diapprove!", 
+                                    type: "success",
 														
-														 timer: 1200,
-														 showCancelButton: false,//There won't be any cancle button
-															showConfirmButton  : false ,
-                                                        }
-														, function() {
-																	location.reload();
-																}
-														);
+									timer: 1200,
+									showCancelButton: false,//There won't be any cancle button
+									showConfirmButton  : false ,
+                                                 	}
+								, function() {
+											location.reload();
+										}
+								);
+							}
+						// sweetAlert({
+	     //                                               title: "Berhasil!", 
+      //                                                   text: "Data Berhasil Diapprove!", 
+      //                                                   type: "success",
+														
+						// 								 timer: 1200,
+						// 								 showCancelButton: false,//There won't be any cancle button
+						// 									showConfirmButton  : false ,
+      //                                                   }
+						// 								, function() {
+						// 											location.reload();
+						// 										}
+						// 								);
 					})
     }else{
         swal({title:"Cancelled",text:"", type:"error"},function(){

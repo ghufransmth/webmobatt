@@ -10,6 +10,7 @@ if($this->session->userdata('user_level') == "admin"){
 			}else{
 				$this->db->where('user_id',$this->session->userdata('id_user'));
 			}
+			$this->db->order_by('created_on','DESC');
 			$get_query=$this->db->get('tb_overtime');
 			if($get_query){
 				$result=$get_query->result_array();
@@ -29,6 +30,7 @@ if($this->session->userdata('user_level') == "admin"){
 				$this->db->where('user_id',$this->session->userdata('id_user'));
 			}
 				$this->db->where('status_approv',0);
+				$this->db->order_by('created_on','DESC');
 			$get_query=$this->db->get('tb_overtime');
 			if($get_query){
 				$result=$get_query->result_array();
@@ -88,6 +90,7 @@ if($this->session->userdata('user_level') == "admin"){
 				$this->db->where('user_id',$this->session->userdata('id_user'));
 			}
 			$this->db->where('status_approv',1);
+			$this->db->order_by('created_on','DESC');
 			$get_query=$this->db->get('tb_overtime');
 			}
 			
@@ -115,6 +118,7 @@ if($this->session->userdata('user_level') == "admin"){
 				$this->db->where('user_id',$this->session->userdata('id_user'));
 			}
 			$this->db->where('status_approv',1);
+			$this->db->order_by('created_on','DESC');
 			$get_query=$this->db->get('tb_overtime');
 			}
 			
@@ -143,6 +147,7 @@ if($this->session->userdata('user_level') == "admin"){
 				$this->db->where('user_id',$this->session->userdata('id_user'));
 			}
 			$this->db->where('status_approv',0);
+			$this->db->order_by('created_on','DESC');
 			$get_query=$this->db->get('tb_overtime');
 			}
 			

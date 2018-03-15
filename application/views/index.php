@@ -27,7 +27,7 @@ $tanggal=date('d/m/Y');
  <!-- Page Loader -->
     
     <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper container" id="element2" style="overflow: scroll;">
+  <div class="content-wrapper container" id="element2" style="overflow: scroll;"><!-- update -->
    
 
     <!-- Main content -->

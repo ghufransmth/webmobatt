@@ -63,7 +63,7 @@
 					"ajax": '<?php echo base_url() ?>/index.php/data_bpjs/get_data_bpjs',
 					"columns": [
 						{ "data": "data_user.0.first_name" },
-							{ "data": "data_bpjs.0.NO_BPJS" },
+						{ "data": "file_bpjs" },
 						 /* { "data": "NOMOR_PENGAJUAN_PIB", 
 							"render" : function(data){
 										var data_array 					= data.split('-');

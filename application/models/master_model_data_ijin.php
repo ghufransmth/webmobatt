@@ -6,15 +6,15 @@
 			
 			if($this->session->userdata('user_level') == "admin"){
 				if($id_shoes_category!=false){
-					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_timeoff  b ON b.user_id=a.id where  b.id='".$id_shoes_category."'");
+					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_timeoff  b ON b.user_id=a.id where  b.id='".$id_shoes_category."' order by b.created_on desc");
 				}else{
-					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_timeoff  b ON b.user_id=a.id");
+					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_timeoff  b ON b.user_id=a.id order by b.created_on desc");
 				}
 			}else{
 				if($id_shoes_category!=false){
-					$get_query=$this->db->query("select a.*,b.* from tb_users  a JOIN tb_timeoff b ON b.user_id=a.id where b.user_id='".$this->session->userdata('id_user')."' and b.id='".$id_shoes_category."'");
+					$get_query=$this->db->query("select a.*,b.* from tb_users  a JOIN tb_timeoff b ON b.user_id=a.id where b.user_id='".$this->session->userdata('id_user')."' and b.id='".$id_shoes_category."' order by b.created_on desc");
 				}else{
-					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_timeoff  b ON b.user_id=a.id where b.user_id='".$this->session->userdata('id_user')."'");
+					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_timeoff  b ON b.user_id=a.id where b.user_id='".$this->session->userdata('id_user')."' order by b.created_on desc");
 				}
 					
 			}
@@ -113,6 +113,7 @@
 				$this->db->where('user_id',$this->session->userdata('id_user'));
 			}
 			$this->db->where('status_approv',1);
+			$this->db->order_by('created_on','DESC');
 			$get_query=$this->db->get('tb_timeoff');
 			}else{
 				
@@ -138,6 +139,7 @@
 				$this->db->where('user_id',$this->session->userdata('id_user'));
 			}
 			$this->db->where('status_approv',1);
+			$this->db->order_by('created_on','DESC');
 			$get_query=$this->db->get('tb_timeoff');
 			}else{
 				$tanggal=date("Y-m-d");
@@ -163,6 +165,7 @@
 				$this->db->where('user_id',$this->session->userdata('id_user'));
 			}
 			$this->db->where('status_approv',0);
+			$this->db->order_by('created_on','DESC');
 			$get_query=$this->db->get('tb_timeoff');
 			}else{
 				
@@ -370,14 +373,15 @@
 		
 		public function approval_ijin($id_shoes_category){
 			
-		
-			$query=$this->db->query("update tb_timeoff  set status_approv='0',approve_by='".$this->session->userdata('id_user')."'  WHERE id='".$id_shoes_category."'");
-			
-			if($query){
+			$queries = $this->db->query("select * from tb_timeoff where id=".$id_shoes_category." and (convert(date,start_date) < convert(date,GETDATE()) or convert(date,end_date)  < convert(date,GETDATE())) ");
+			$result  = $queries->num_rows();
+			if($result == 0){
+				$query=$this->db->query("update tb_timeoff  set status_approv='0',approve_by='".$this->session->userdata('id_user')."'  WHERE id='".$id_shoes_category."'");
 				return true;
 			}else{
 				return false;
 			}
+
 		}
 		
 			public function reject_approval_ijin($id_shoes_category){

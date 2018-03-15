@@ -59,11 +59,11 @@
 											</select>
 											 <div id="alasan_alert" style="color:red"></div>
 									</div>
-									<div class="form-group">
+									<!-- <div class="form-group">
 										<label for="exampleInputEmail1">Libur Nasional ?</label>
 										<input type="checkbox" value="0" name="is_libur_nasional" >
 											 <div id="alasan_alert" style="color:red"></div>
-									</div>
+									</div> -->
 									<!--
 									<div class="form-group">
 										<label for="exampleInputEmail1">Menggantikan Ijin Pegawai</label>
@@ -95,13 +95,15 @@
 
 				$('#jam_masuk').datetimepicker({
 					format: 'YYYY-MM-DD',
-					startDate: '-1m',
-   					endDate: lastDate,
+					minDate: today,
+					// startDate: '-1m',
+   		// 			endDate: lastDate,
 					ignoreReadonly: true
                 });
 				$('#jam_keluar').datetimepicker({
-					format: 'YYYY-MM-DD HH:mm:00.000',
-					 ignoreReadonly: true
+					format: 'YYYY-MM-DD',
+					minDate: today,
+					ignoreReadonly: true
                 });
 			
 			});

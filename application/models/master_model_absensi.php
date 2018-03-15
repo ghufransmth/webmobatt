@@ -17,7 +17,7 @@
 		
 		public function data_absensi($id_shoes_category=false){
 			$date=date("Y-m-d");
-			 $get_query=$this->db->query('select TIME(start_date)as jam_masuk from tb_geoatt where user_id="'.$id_shoes_category.'" and DATE(start_date)="'.$date.'" ORDER BY id DESC LIMIT 0,1 ');
+			 $get_query=$this->db->query("select top 1 convert(varchar,start_date,8)as jam_masuk from tb_geoatt where user_id=".$id_shoes_category." and convert(varchar(10),start_date,120)='".$date."' ORDER BY id DESC");
 		
 			if($get_query){
 				$result=$get_query->result_array();
@@ -81,8 +81,8 @@
 		
 		
 		public function get_status_absensi($id_shoes_category=false){
-			$date=date("Y-m-d");
-			 $get_query=$this->db->query('select *,count(*)as total from tb_geoatt where user_id="'.$id_shoes_category.'" and DATE(start_date)="'.$date.'" ORDER BY id DESC LIMIT 0,1 ');
+			$date = date("Y-m-d");
+			$get_query=$this->db->query("select top 1 count(*)as total from tb_geoatt where user_id=".$id_shoes_category." and convert(varchar(10),start_date,120)='".$date."'");
 		
 			if($get_query){
 				$result=$get_query->result_array();
@@ -370,9 +370,10 @@ ORDER BY start_date ASC
 				
 				
 			//	$insert=$this->db->insert('tb_geoatt',$data_barang);
-					$this->db->where('user_id',$data['user_id']);
-						$this->db->where('date(start_date)',$date);
-					$insert=$this->db->update('tb_geoatt',$data_barang);
+					// $this->db->where('user_id',$data['user_id']);
+					// 	$this->db->where('convert(varchar(10),start_date,120)',$date);
+					// $insert=$this->db->update('tb_geoatt',$data_barang);
+					$insert=$this->db->query("UPDATE tb_geoatt SET end_date = CONVERT(varchar,GETDATE(),120), keterangan = '".$data_barang['keterangan']."' WHERE user_id =".$data['user_id']."AND convert(varchar(10),start_date,120) = '".$date."'");
 			
 				
 				if($insert){
@@ -417,7 +418,7 @@ ORDER BY start_date ASC
 		
 		public function save_data_absensi_ijin_cepat($data){
 			$date=date("Y-m-d");
-			$status2=$this->db->query('select COUNT(*)as total_data from tb_geoatt where  user_id="'.$data['user_id'].'" and DATE(start_date)="'.$date.'"');
+			$status2=$this->db->query("select COUNT(*)as total_data from tb_geoatt where  user_id=".$data['user_id']." and CONVERT(varchar(10),start_date,120)='".$date."'");
 			$result2=$status2->result_array();
 			if($result2[0]['total_data'] > 0){
 			
@@ -427,10 +428,10 @@ ORDER BY start_date ASC
 				
 				
 			//	$insert=$this->db->insert('tb_geoatt',$data_barang);
-					$this->db->where('user_id',$data['user_id']);
-						$this->db->where('date(start_date)',$date);
-					$insert=$this->db->update('tb_geoatt',$data_barang);
-			
+					// $this->db->where('user_id',$data['user_id']);
+					// 	$this->db->where('date(start_date)',$date);
+					// $insert=$this->db->update('tb_geoatt',$data_barang);
+				$insert=$this->db->query("UPDATE tb_geoatt SET end_date = CONVERT(varchar,GETDATE(),120), keterangan = '".$data_barang['keterangan']."',work = 0 WHERE user_id =".$data['user_id']."AND convert(varchar(10),start_date,120) = '".$date."'");
 			
 				
 				if($insert){
