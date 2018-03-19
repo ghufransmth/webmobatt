@@ -17,7 +17,7 @@
 		
 			public function data_master_bpjs2($id_shoes_category=false){
 		
-			$get_query=$this->db->query('select a.*,b.* from tb_bpjs a JOIN tb_users b ON a.id_pegawai=b.id');
+			$get_query=$this->db->query('select a.id as ids,a.id_pegawai,a.file_bpjs,a.user_id,a.deleted,b.* from tb_bpjs a JOIN tb_users b ON a.id_pegawai=b.id where a.deleted = 0');
 			if($get_query){
 				$result=$get_query->result_array();
 			}else{
@@ -106,8 +106,8 @@
 				}
 			
 				
-						$data['id_pegawai']=$data_set['nama_pegawai'];
-					$data['user_id']=$data_set['user_id'];
+					$data['id_pegawai']=$data_set['nama_pegawai'];
+					$data['user_id']=1;
 					$this->db->where('id',$data_set['id']);
 					$update=$this->db->update('tb_bpjs',$data);
 					
@@ -239,7 +239,7 @@
 		public function delete_bpjs($id_shoes_category){
 			
 		
-			$query=$this->db->query('update tb_bpjs set deleted="1" WHERE id="'.$id_shoes_category.'"');
+			$query=$this->db->query("update tb_bpjs set deleted=1 WHERE id='".$id_shoes_category."'");
 			
 			if($query){
 				return true;

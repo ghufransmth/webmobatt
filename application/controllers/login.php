@@ -98,15 +98,16 @@
 				}
 				else{
 					$datanya=$_POST;
-						$user_error=$this->master_login->data_login($datanya);
+					$user_error=$this->master_login->data_login($datanya);
 							$hasil3= $user_error->result_array();
-					$username =$hasil3[0]['totalnya'];
+					$jumlah = $user_error->result_num_rows();
+					// $username =$hasil3[0]['totalnya'];
 					$id =$hasil3[0]['id'];
 					$data['status']="GAGAL LOGIN";
 					$data['is_logged_in']=false;
 					$data['total']=1;
 					$data['id']=$id;
-					if($username == 0){
+					if($jumlah == 0){
 						$data['total']=0;
 					}else{
 						$data['total']=1;

@@ -72,16 +72,15 @@
                    							return '<a href="#"><button type="button" class="btn btn-info btn-sm"  data-toggle="modal" data-target="#myModal_bea_cukai" style="border-radius:0px;" onclick="edit_pib_bea_cukai('+data_array+')";><i class="fa fa-check"></i></button></a>'
 						 }}, */
 						 <?php
-										if($this->session->userdata('user_level') == "admin"){
+						if($this->session->userdata('user_level') == "admin"){
 				
-										?>
-						{ "data": "id", 
+						?>
+						{ "data": "ids", 
 						"render" : function(data){
 							return '<a href="<?php echo base_url()?>index.php/data_bpjs/view_edit_data_bpjs/'+data+'"><button type="button" class="btn btn-success btn-sm"   style="border-radius:0px;" ><i class="fa fa-pencil-square-o"></i></button></a>&nbsp;&nbsp;&nbsp;<a href="#"><button type="button" onclick="delete_master_shoes_category('+data+')" class="btn btn-danger btn-sm" style="border-radius:0px;" ><i class="fa fa-trash-o"></i></button></a>'
 						}}
-						
 						<?php
-										}
+						}
 						?>
 					]
 			});

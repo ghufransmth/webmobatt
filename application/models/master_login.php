@@ -21,7 +21,7 @@
 				return $query;
 		}
 		public function data_login($data){
-			$query=$this->db->query('select id,count(*)as totalnya from dbo.tb_users where username="'.$data['username'].'" and blocked="1"');
+			$query=$this->db->query("select id totalnya from dbo.tb_users where username='".$data['username']."' and blocked=1");
 			 //$this->db->insert('data_session_log',$data_save);
 			// $this->db->query('UPDATE master_data_user SET last_login=CURRENT_TIMESTAMP where password="'.$data['password'].'"');
 				return $query;

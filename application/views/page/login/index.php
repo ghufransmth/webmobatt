@@ -55,25 +55,36 @@ License URL: http://creativecommons.org/licenses/by/3.0/
 				contentType	: false,
 				success:function (data){
 				//console.log(data);
-						if(data.is_logged_in==true){
+					if(data.is_logged_in==true){
 							
 							sweetAlert({
-	                                                   title: "Berhasil!", 
-                                                        text: "Berhasil Login!", 
-                                                        type: "success",
+	                        title: "Berhasil!", 
+                            text: "Berhasil Login!", 
+                            type: "success",
 														
-														 timer: 120,
-														 showCancelButton: false,//There won't be any cancle button
-															showConfirmButton  : false ,
-                                                        }
-														, function() {
-																	location.href = "<?php echo base_url() ?>index.php/home";
-														}
-														);
+							timer: 120,
+							showCancelButton: false,//There won't be any cancle button
+							showConfirmButton  : false ,
+                            }
+							, function() {
+										location.href = "<?php echo base_url() ?>index.php/home";
+							});
 						//console.log(usernamee.username);
 						//alert(usernamee.username);
-						
-
+					
+					}else{
+							sweetAlert({
+	                        title: "Password Salah!", 
+                            text: "Gagal Login!", 
+                            type: "warning",
+														
+							timer: 400,
+							showCancelButton: false,//There won't be any cancle button
+							showConfirmButton  : false ,
+                            }
+							, function() {
+										location.href = "<?php echo base_url() ?>index.php";
+							});
 					}
 				}
 			})

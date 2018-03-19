@@ -124,9 +124,10 @@
 															showConfirmButton  : false ,
                                                         }
 														, function() {
-																//	location.reload();
+																	location.reload();
 																}
 														);
+				
 					})
     }else{
         swal({title:"Cancelled",text:"", type:"error"},function(){
