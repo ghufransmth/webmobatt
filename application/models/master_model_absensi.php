@@ -279,7 +279,12 @@ ORDER BY start_date ASC
 			
 			else{
 				if($id_shoes_category!=false){
-			$get_query=$this->db->query('select a.*,b.* from tb_users a JOIN tb_delegate b ON a.id=b.delegate_by where a.atasan_1="'.$this->session->userdata('jabatan').'" and a.atasan_2="'.$this->session->userdata('id_user').'" and b.id="'.$id_shoes_category.'"');
+			$get_query=$this->db->query('select a.*,b.*,c.username as nama from tb_delegate a 
+				JOIN 
+				tb_users b ON a.delegate_by = b.id
+				JOIN
+				tb_users c ON a.delegate_for = c.id 
+				where b.atasan_1="'.$this->session->userdata('jabatan').'" and b.atasan_2="'.$this->session->userdata('id_user').'" and a.id="'.$id_shoes_category.'"');
 				}else{
 			$get_query=$this->db->query('select a.*,b.* from tb_users a JOIN tb_delegate b ON a.id=b.delegate_by where a.atasan_1="'.$this->session->userdata('jabatan').'" and a.atasan_2="'.$this->session->userdata('id_user').'" ');
 				

@@ -124,6 +124,38 @@ class Data_ijin extends CI_Controller {
 		}
 			$this->output->set_content_type('application/json')->set_output(json_encode($data));	
 	}
+
+	public function get_data_ijin_cepat($id_user=false){
+			$data['data']=$this->master_model_data_ijin->data_master_ijin_cepat($id_user);
+		// for($i=0;$i<count($data['data']);$i++){
+		// 		// if($data['data'][$i]['status_approv'] == 1){
+		// 		// 	$data['data'][$i]['data_approval_status']="Belum Disetujui";
+		// 		// }else{
+		// 		// 	$data['data'][$i]['data_approval_status']="Disetujui";
+					
+		// 		// }
+		// 		// $data['data'][$i]['nama_user']=$this->master_model_user->data_master_user($data['data'][$i]['user_id']);
+		// 		// $data['data'][$i]['data_ijin_list2']=$this->master_model_data_ijin->data_master_ijin_list($data['data'][$i]['reason']);
+			
+		// 		// if(isset($data['data'][$i]['data_ijin_list2'][0]['reason_desc'])){
+		// 		// $data['data'][$i]['data_ijin_list']=$this->master_model_data_ijin->data_master_ijin_list($data['data'][$i]['reason']);
+				
+		// 		// }else{
+		// 		// $data['data'][$i]['data_ijin_list']=array(array("reason_desc"=>"-"));
+				
+		// 		// }
+		// 		// if($data['data'][$i]['status_approv'] == 1){
+		// 		// 	$data['data'][$i]['data_action']='<a href="'.base_url().'/index.php/data_ijin/edit_data_ijin/'.$data['data'][$i]['id'].'"><button type="button" class="btn btn-success btn-sm"   style="border-radius:0px;" ><i class="fa fa-pencil-square-o"></i></button></a>&nbsp;&nbsp;&nbsp;<a href="#"><button type="button" onclick="delete_master_shoes_category('.$data['data'][$i]['id'].')" class="btn btn-danger btn-sm" style="border-radius:0px;" ><i class="fa fa-trash-o"></i></button></a>';
+		
+		// 		// }else{
+		// 		// 	$data['data'][$i]['data_action']='<button type="button" class="btn btn-warning btn-sm"   style="border-radius:0px;" >Sudah Disetujui</button>';
+					
+					
+		// 		// }
+			
+		// }
+			$this->output->set_content_type('application/json')->set_output(json_encode($data));	
+	}
 	
 		public function get_data_ijin_sudah_disetujui($id_user=false){
 			$data['data']=$this->master_model_data_ijin->data_master_ijin_setuju_index($id_user);

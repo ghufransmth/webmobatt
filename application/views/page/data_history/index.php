@@ -27,6 +27,7 @@
               <li class="active"><a href="#tab_1" data-toggle="tab">Data Absensi</a></li>
               <li><a href="#tab_2" data-toggle="tab">Data Ijin</a></li>
               <li><a href="#tab_3" data-toggle="tab">Data Lembur</a></li>
+              <li><a href="#tab_4" data-toggle="tab">Data Izin Cepat</a></li>
             
               <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li>
             </ul>
@@ -182,6 +183,7 @@
               </div>
               <!-- /.tab-pane -->
               <div class="tab-pane" id="tab_3">
+              	<h2>DATA LEMBUR</h2>
                <table class="table table-striped" id="data-lembur">
 								<thead>
 									<tr>
@@ -199,6 +201,23 @@
 							</table>
               </div>
               <!-- /.tab-pane -->
+              <div class="tab-pane" id="tab_4">
+			    <h2>DATA IJIN CEPAT</h2>
+              	<table class="table table-striped" id="data-ijin-cepat">
+								<thead>
+									<tr>
+										<th>Nama Pegawai</th>
+										<th>Tanggal Mulai</th>
+										<th>Tanggal Selesai</th>
+										
+									</tr>
+								</thead>
+								<tbody>
+								
+								</tbody>
+							</table>
+              </div>
+              <!-- ./tab-pane -->
             </div>
             <!-- /.tab-content -->
           </div>
@@ -260,6 +279,33 @@
 						{ "data": "date" },
 						{ "data": "start_hour" },
 						{ "data": "end_hour" }
+					]
+			});
+			
+
+			
+				
+		});
+	</script>
+
+	<script>
+		$(document).ready(function(){ 
+			$("#data-ijin-cepat").dataTable({
+					"bPaginate": true,
+					"bLengthChange": true,
+					"bFilter": true,
+					"bSort": true,
+					"bInfo": true,
+					"bAutoWidth": false,
+					"processing": true,
+					"ajax": '<?php echo base_url() ?>/index.php/data_ijin/get_data_ijin_cepat',
+					"columns": [
+						{ "data": "first_name" },
+						{ "data": "start_date" },
+						{ "data": "end_date" }
+						
+						
+					
 					]
 			});
 			

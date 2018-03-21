@@ -27,6 +27,31 @@
 			}
 			return $result;
 		}
+
+		public function data_master_ijin_cepat($id_shoes_category=false){
+			if($this->session->userdata('user_level') == "admin"){
+				if($id_shoes_category!=false){
+					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_geoatt b ON b.user_id=a.id where b.id='".$id_shoes_category."' AND b.ijin_pulang_cepat = 1 order by b.created_on desc");
+				}else{
+					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_geoatt b ON b.user_id=a.id where b.ijin_pulang_cepat = 1 order by b.created_on desc");
+				}
+			}else{
+				if($id_shoes_category!=false){
+					$get_query=$this->db->query("select a.*,b.* from tb_users  a JOIN tb_geoatt b ON b.user_id=a.id where b.user_id='".$this->session->userdata('id_user')."' and b.id='".$id_shoes_category."' AND b.ijin_pulang_cepat = 1 order by b.created_on desc");
+				}else{
+					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_geoatt  b ON b.user_id=a.id where b.user_id='".$this->session->userdata('id_user')."' AND b.ijin_pulang_cepat = 1 order by b.created_on desc");
+				}
+					
+			}
+			
+		
+			if($get_query){
+				$result=$get_query->result_array();
+			}else{
+				$result=0;
+			}
+			return $result;
+		}
 		
 		public function data_master_ijin_search_laporan($data=false){
 		
@@ -252,8 +277,8 @@
 				$data_barang['approve_by']=1;
 				$data_barang['is_libur_nasional']=$libur;
 				$data_barang['seen']=1;
-				$data_barang['created_on']=$data['start_date'];
-				$data_barang['modified_on']=$data['start_date'];
+				$data_barang['created_on']=date('Y-m-d h:i:sa');
+				$data_barang['modified_on']=date('Y-m-d h:i:sa');
 				
 				
 				$insert=$this->db->insert('tb_timeoff',$data_barang);

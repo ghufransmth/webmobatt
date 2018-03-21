@@ -162,7 +162,7 @@
 					
 							sweetAlert({
 	                                                   title: "Berhasil!", 
-                                                        text: "Berhasil Masuk!", 
+                                                        text: "Berhasil Input Data!", 
                                                         type: "success",
 														
 														 showCancelButton: false,//There won't be any cancle button

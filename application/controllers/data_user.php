@@ -179,7 +179,7 @@ $this->load->model('master_model_data');
 				
 			}
 		
-		
+		error_reporting(0);
 		$this->load->view('style.php');
 		$this->load->view('menu_header.php');
 		$this->load->view('page/data_user/view_master_data_user.php',$data);

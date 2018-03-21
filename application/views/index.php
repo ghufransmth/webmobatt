@@ -1,5 +1,6 @@
     <link href="<?php echo"".base_url().""; ?>/assets/css/style.css" rel="stylesheet">
-	  <link href="<?php echo"".base_url().""; ?>/assets/css/loading.css" rel="stylesheet">
+    <link href="<?php echo"".base_url().""; ?>/assets/css/loading.css" rel="stylesheet"> 
+   
   <style>
             #progress_test {
                 display         : block;
@@ -18,9 +19,11 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
-  
+  <script src="<?php echo"".base_url().""; ?>/assets/js/admin.js"></script>
+   <script src="<?php echo"".base_url().""; ?>/assets/js/moment.js"></script>
     <script src="<?php echo"".base_url().""; ?>/assets/js/loadingoverlay.min.js"></script>
         <script src="<?php echo"".base_url().""; ?>/assets/js/loadingoverlay_progress.min.js"></script>
+
 <?php
 $tanggal=date('d/m/Y');
 ?>
@@ -49,7 +52,7 @@ $tanggal=date('d/m/Y');
     	<div class="map-outer">
 
             <!--Map Canvas-->
-            <div style="width:100%;height:500px"class="map-canvas"
+            <div style="width:100%;height:500px" class="map-canvas"
                 data-zoom="8"
                 data-lat="-37.817085"
                 data-lng="144.955631"
@@ -383,7 +386,7 @@ $tanggal=date('d/m/Y');
                 });
             });
         </script>
-   <script src="<?php echo"".base_url().""; ?>/assets/bootstrap/js/bootstrap.min.js"></script>
+   <!-- <script src="<?php echo"".base_url().""; ?>/assets/bootstrap/js/bootstrap.min.js"></script> -->
 <!--   
    <?php
 				/*	 foreach($data as $val){

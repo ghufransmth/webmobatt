@@ -68,6 +68,12 @@ $tanggal=date('d/m/Y');
 										  <span class="glyphicon glyphicon-time"></span>
 										</span>
 									  </div>
+									  <br>
+									  <br>
+									  <label for="exampleInputEmail1">Alasan</label>
+										<select name="reason" id="reason" class="form-control"  >						
+											</select>
+											 <div id="alasan_alert" style="color:red"></div>
 									  <div id="start_hour_alert" style="color:red"></div>
 									</div>
 					  </div><br /><br />
