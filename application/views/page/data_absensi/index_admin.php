@@ -22,6 +22,15 @@
 				<div class="col-md-12">
 					<div class="box box-primary">
 						<div class="box-body">
+
+							<ul class="nav nav-tabs">
+				              <li class="active"><a href="#tab_1" data-toggle="tab">Data Absensi</a></li>
+				              <li><a href="#tab_2" data-toggle="tab">Data Izin Cepat</a></li>
+				            
+				              <!-- <li class="pull-right"><a href="#" class="text-muted"><i class="fa fa-gear"></i></a></li> -->
+				            </ul>
+				            <div class="tab-content">
+              					<div class="tab-pane active" id="tab_1">
 								<form action="<?php echo base_url() ?>index.php/data_absensi/search_admin" method="POST">
 								<table class="table table-bordered">
 									<tr>
@@ -77,9 +86,22 @@
 									<tr>
 										
 										<?php
-											for($i=1;$i<=31;$i++){
+										if($search == 0){
+											$date = date('t');
+											for($i=1;$i<=$date;$i++){
+												echo"<td style=\"text-align:center;background-color:#18365E;color:white;border:1px solid #FFD700\"><b>$i</b></td>";
+											}	
+										}else if($search == 1){
+											for($i=1;$i<=$enddate;$i++){
 												echo"<td style=\"text-align:center;background-color:#18365E;color:white;border:1px solid #FFD700\"><b>$i</b></td>";
 											}
+										}else{
+											$date = date('t');
+											for($i=1;$i<=$date;$i++){
+												echo"<td style=\"text-align:center;background-color:#18365E;color:white;border:1px solid #FFD700\"><b>$i</b></td>";
+											}
+										}
+										
 										?>
 									</tr>
 								</thead>
@@ -100,46 +122,110 @@
 												
 												
 												
-																		
-									for($i=1;$i<=31;$i++){
+									if($search == 0){
+											$date = date('t');
+											for($i=1;$i<=$date;$i++){
 										
-										if(isset($val_2['data_absensi'][$i][0]['id'])){
-										$id=$val_2['data_absensi'][$i][0]['id'];
-										$link="".base_url()."index.php/data_absensi/detail_absensi/".$id."/1";
-									}else{
-										$id=0;
-										$link="#";
-									}
-									
-												if(isset($val_2['data_absensi'][$i][0]['jam_masuk'])){
-													$jam_masuk_set=$val_2['data_absensi'][$i][0]['jam_masuk'];
-													$jam_masuk = substr($jam_masuk_set, 0,-3);
-												}else{
-													$jam_masuk="00:00";
-												}
-												
+											if(isset($val_2['data_absensi'][$i][0]['id'])){
+											$id=$val_2['data_absensi'][$i][0]['id'];
+											$link="".base_url()."index.php/data_absensi/detail_absensi/".$id."/1";
+											}else{
+												$id=0;
+												$link="#";
+											}
+										
+													if(isset($val_2['data_absensi'][$i][0]['jam_masuk'])){
+														$jam_masuk_set=$val_2['data_absensi'][$i][0]['jam_masuk'];
+														$jam_masuk = substr($jam_masuk_set, 0,-3);
+													}else{
+														$jam_masuk="00:00";
+													}
+													
 													if(isset($val_2['data_absensi'][$i][0]['jam_keluar'])){
-													$jam_keluar_set=$val_2['data_absensi'][$i][0]['jam_keluar'];
-													$jam_keluar = substr($jam_keluar_set, 0,-3);
-												}else{
-													$jam_keluar="00:00";
-												}
+														$jam_keluar_set=$val_2['data_absensi'][$i][0]['jam_keluar'];
+														$jam_keluar = substr($jam_keluar_set, 0,-3);
+													}else{
+														$jam_keluar="00:00";
+													}
+													
+															
+													echo"
+													<td>
+														<a href='$link'>".$jam_masuk." </a><br /><a href='$link'>".$jam_keluar." </a> 
+														
+													</td>
+													";
+										}	
+									}else if($search == 1){
+											for($i=1;$i<=$enddate;$i++){
+										
+											if(isset($val_2['data_absensi'][$i][0]['id'])){
+											$id=$val_2['data_absensi'][$i][0]['id'];
+											$link="".base_url()."index.php/data_absensi/detail_absensi/".$id."/1";
+											}else{
+												$id=0;
+												$link="#";
+											}
+										
+													if(isset($val_2['data_absensi'][$i][0]['jam_masuk'])){
+														$jam_masuk_set=$val_2['data_absensi'][$i][0]['jam_masuk'];
+														$jam_masuk = substr($jam_masuk_set, 0,-3);
+													}else{
+														$jam_masuk="00:00";
+													}
+													
+													if(isset($val_2['data_absensi'][$i][0]['jam_keluar'])){
+														$jam_keluar_set=$val_2['data_absensi'][$i][0]['jam_keluar'];
+														$jam_keluar = substr($jam_keluar_set, 0,-3);
+													}else{
+														$jam_keluar="00:00";
+													}
+													
+															
+													echo"
+													<td>
+														<a href='$link'>".$jam_masuk." </a><br /><a href='$link'>".$jam_keluar." </a> 
+														
+													</td>
+													";
+										}
+									}else{
+											$date = date('t');
+											for($i=1;$i<=$date;$i++){
+										
+											if(isset($val_2['data_absensi'][$i][0]['id'])){
+											$id=$val_2['data_absensi'][$i][0]['id'];
+											$link="".base_url()."index.php/data_absensi/detail_absensi/".$id."/1";
+											}else{
+												$id=0;
+												$link="#";
+											}
+										
+													if(isset($val_2['data_absensi'][$i][0]['jam_masuk'])){
+														$jam_masuk_set=$val_2['data_absensi'][$i][0]['jam_masuk'];
+														$jam_masuk = substr($jam_masuk_set, 0,-3);
+													}else{
+														$jam_masuk="00:00";
+													}
+													
+													if(isset($val_2['data_absensi'][$i][0]['jam_keluar'])){
+														$jam_keluar_set=$val_2['data_absensi'][$i][0]['jam_keluar'];
+														$jam_keluar = substr($jam_keluar_set, 0,-3);
+													}else{
+														$jam_keluar="00:00";
+													}
+													
+															
+													echo"
+													<td>
+														<a href='$link'>".$jam_masuk." </a><br /><a href='$link'>".$jam_keluar." </a> 
+														
+													</td>
+													";
+										}	
+									}									
 												
 														
-												echo"
-												<td>
-													<a href='$link'>".$jam_masuk." </a><br /><a href='$link'>".$jam_keluar." </a> 
-													
-												</td>
-												";
-									}
-												
-												
-												
-												
-												
-												
-												
 												echo"
 												</tr>
 												";
@@ -149,7 +235,62 @@
 								?>
 								</tbody>
 							</table>
+							<!-- <table class="table table-striped" id="data-absen">
+									<thead>
+									<tr>
+										<td rowspan="2" style="background-color:#18365E;color:white;border:1px solid #FFD700">Nama Pegawai</td>
+										<td COLSPAN="31" style="text-align:center;background-color:#18365E;color:white;border:1px solid #FFD700"><b>TANGGAL ABSENSI</b></td>
+									</tr>
+										<tr>
+											
+											<?php
+											if($search == 0){
+												$date = date('t');
+												for($i=1;$i<=$date;$i++){
+													echo"<td style=\"text-align:center;background-color:#18365E;color:white;border:1px solid #FFD700\"><b>$i</b></td>";
+												}	
+											}else if($search == 1){
+												for($i=1;$i<=$enddate;$i++){
+													echo"<td style=\"text-align:center;background-color:#18365E;color:white;border:1px solid #FFD700\"><b>$i</b></td>";
+												}
+											}else{
+												$date = date('t');
+												for($i=1;$i<=$date;$i++){
+													echo"<td style=\"text-align:center;background-color:#18365E;color:white;border:1px solid #FFD700\"><b>$i</b></td>";
+												}
+											}
+											
+											?>
+										</tr>
+									</thead>
+									<tbody>
+									
+									</tbody>
+							</table> -->
 							</div>
+							</div>
+
+							<div class="tab-pane" id="tab_2">
+								<br>
+								<table class="table table-striped" id="data-brands">
+									<thead>
+										<tr>
+											<th>Nama Pegawai</th>
+											<th>Tanggal Mulai Absensi</th>
+											<th>Tanggal Selesai Absensi</th>
+											
+										</tr>
+									</thead>
+									<tbody>
+									
+									</tbody>
+								</table>
+							</div>
+
+							</div>
+
+
+							
 						</div><!-- /.box-body -->
 					</div><!-- /.box -->
 				</div>	
@@ -170,35 +311,36 @@
 					"bInfo": true,
 					"bAutoWidth": false,
 					"processing": true,
-					"ajax": '<?php echo base_url() ?>/index.php/data_ijin/get_data_ijin',
+					"ajax": '<?php echo base_url() ?>/index.php/data_absensi/get_data_absensi_pulang_cepat',
 					"columns": [
-						{ "data": "nama_user.0.first_name" },
+						{ "data": "username" },
 						{ "data": "start_date" },
-						{ "data": "end_date" },
-						{ "data": "reason" },
-						{ "data": "data_approval_status" },
+						{ "data": "end_date" }
 						
-						
-						
-						 /* { "data": "NOMOR_PENGAJUAN_PIB", 
-							"render" : function(data){
-										var data_array 					= data.split('-');
-										var data_nomor_pengajuan 		= data_array[0];
-										
-                   							return '<a href="#"><button type="button" class="btn btn-info btn-sm"  data-toggle="modal" data-target="#myModal_bea_cukai" style="border-radius:0px;" onclick="edit_pib_bea_cukai('+data_array+')";><i class="fa fa-check"></i></button></a>'
-						 }}, */
-						 <?php
-										if($this->session->userdata('user_level') == "admin"){
+					]
+			});
+			
+
+			
 				
-										?>
-						{ "data": "id", 
-						"render" : function(data){
-							return '<a href="<?php echo base_url()?>index.php/data_ijin/edit_data_ijin/'+data+'"><button type="button" class="btn btn-success btn-sm"   style="border-radius:0px;" ><i class="fa fa-pencil-square-o"></i></button></a>&nbsp;&nbsp;&nbsp;<a href="#"><button type="button" onclick="delete_master_shoes_category('+data+')" class="btn btn-danger btn-sm" style="border-radius:0px;" ><i class="fa fa-trash-o"></i></button></a>'
-						}}
+		});
+	</script>
+	<script>
+		$(document).ready(function(){ 
+			$("#data-absen").dataTable({
+					"bPaginate": true,
+					"bLengthChange": true,
+					"bFilter": true,
+					"bSort": true,
+					"bInfo": true,
+					"bAutoWidth": false,
+					"processing": true,
+					"ajax": '<?php echo base_url() ?>/index.php/data_absensi/get_data_absensis',
+					"columns": [
+						{ "data": "username" },
+						{ "data": "start_date" },
+						{ "data": "end_date" }
 						
-						<?php
-										}
-						?>
 					]
 			});
 			

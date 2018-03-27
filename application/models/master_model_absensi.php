@@ -26,6 +26,30 @@
 			}
 			return $result;
 		}
+
+		public function data_absensi_pulang_cepat($id_shoes_category=false){
+			$date=date("Y-m-d");
+			 $get_query=$this->db->query("select a.start_date, a.end_date, b.username from tb_geoatt a left join tb_users b on a.user_id = b.id where a.ijin_pulang_cepat = 1 ORDER BY a.start_date DESC");
+		
+			if($get_query){
+				$result=$get_query->result_array();
+			}else{
+				$result=0;
+			}
+			return $result;
+		}
+
+		public function data_absensis($id_shoes_category=false){
+			$date=date("Y-m-d");
+			 $get_query=$this->db->query("select a.start_date, a.end_date, b.username from tb_geoatt a left join tb_users b on a.user_id = b.id where a.ijin_pulang_cepat = 1 ORDER BY a.start_date DESC");
+		
+			if($get_query){
+				$result=$get_query->result_array();
+			}else{
+				$result=0;
+			}
+			return $result;
+		}
 		
 		public function data_absensi_max($id_shoes_category=false){
 			$bulan=date("m");
@@ -428,7 +452,7 @@ ORDER BY start_date ASC
 			if($result2[0]['total_data'] > 0){
 			
 				$data_barang['end_date']="".$date."		".$data['start_date']."";
-				$data_barang['keterangan']='nope';
+				$data_barang['keterangan']=$data['reason'];
 				$data_barang['work']=0;
 				
 				
@@ -450,6 +474,18 @@ ORDER BY start_date ASC
 					return false;
 				
 			}
+		}
+
+		public function data_master_ijin_work($id){
+			$date=date("Y-m-d");
+			$get_query=$this->db->query("select work from tb_geoatt where user_id=".$id." and CONVERT(varchar(10),start_date,120)='".$date."'");
+
+			if($get_query){
+				$result=$get_query->result_array();
+			}else{
+				$result=0;
+			}
+			return $result;
 		}
 		
 		

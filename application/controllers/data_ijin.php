@@ -187,6 +187,7 @@ class Data_ijin extends CI_Controller {
 	
 			$this->output->set_content_type('application/json')->set_output(json_encode($data));	
 	}
+
 		public function get_data_ijin_approval($id_user=false){
 			$data['data']=$this->master_model_data_ijin->data_master_ijin_approval($id_user);
 		for($i=0;$i<count($data['data']);$i++){

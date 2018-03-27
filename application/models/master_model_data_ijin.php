@@ -6,9 +6,9 @@
 			
 			if($this->session->userdata('user_level') == "admin"){
 				if($id_shoes_category!=false){
-					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_timeoff  b ON b.user_id=a.id where  b.id='".$id_shoes_category."' order by b.created_on desc");
+					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_timeoff  b ON b.user_id=a.id where  b.user_id='".$this->session->userdata('id_user')."' and b.id='".$id_shoes_category."' order by b.created_on desc");
 				}else{
-					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_timeoff  b ON b.user_id=a.id order by b.created_on desc");
+					$get_query=$this->db->query("select a.*,b.* from tb_users a JOIN tb_timeoff  b ON b.user_id=a.id where b.user_id='".$this->session->userdata('id_user')."' order by b.created_on desc");
 				}
 			}else{
 				if($id_shoes_category!=false){
