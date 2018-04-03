@@ -28,25 +28,40 @@ class Data_approval_delegated extends CI_Controller {
 	}
 
 	public function index()
-	{
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_approval_delegated/index.php');
-		$this->load->view('footer.php');
+	{	
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_approval_delegated/index.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+		
 	}
 	public function index_absensi()
 	{
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_approval_delegated/index_absensi.php');
-		$this->load->view('footer.php');
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_approval_delegated/index_absensi.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+		
 	}
 	public function index_lembur()
 	{
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_approval_delegated/index_lembur.php');
-		$this->load->view('footer.php');
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_approval_delegated/index_lembur.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+		
 	}
 	public function get_data_overtime($id_user=false){
 			$data['data']=$this->master_model_data_overtime->data_master_overtime($id_user);
@@ -55,11 +70,15 @@ class Data_approval_delegated extends CI_Controller {
 	}
 	public function input_data_overtime()
 	{
-				
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_overtime/input_data_overtime.php');
-		$this->load->view('footer.php');
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_overtime/input_data_overtime.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+		
 	}
 	
 		public function save_overtime()

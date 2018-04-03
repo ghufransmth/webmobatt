@@ -106,7 +106,7 @@
 		
 		public function get_status_absensi($id_shoes_category=false){
 			$date = date("Y-m-d");
-			$get_query=$this->db->query("select top 1 count(*)as total from tb_geoatt where user_id=".$id_shoes_category." and convert(varchar(10),start_date,120)='".$date."'");
+			$get_query=$this->db->query("select work from tb_geoatt where user_id=".$id_shoes_category." and convert(varchar(10),start_date,120)='".$date."'");
 		
 			if($get_query){
 				$result=$get_query->result_array();
@@ -390,7 +390,7 @@ ORDER BY start_date ASC
 		
 		public function save_data_absensi($data){
 			$date=date("Y-m-d");
-			$status2=$this->db->query("select COUNT(*)as total_data from tb_geoatt where  user_id='".$data['user_id']."' and CAST(start_date AS DATE)='".$date."'");
+			$status2=$this->db->query("select COUNT(*)as total_data from tb_geoatt where user_id='".$data['user_id']."' and CAST(start_date AS DATE)='".$date."'");
 			$result2=$status2->result_array();
 			if($result2[0]['total_data'] > 0){
 			
@@ -402,7 +402,7 @@ ORDER BY start_date ASC
 					// $this->db->where('user_id',$data['user_id']);
 					// 	$this->db->where('convert(varchar(10),start_date,120)',$date);
 					// $insert=$this->db->update('tb_geoatt',$data_barang);
-					$insert=$this->db->query("UPDATE tb_geoatt SET end_date = CONVERT(varchar,GETDATE(),120), keterangan = '".$data_barang['keterangan']."' WHERE user_id =".$data['user_id']."AND convert(varchar(10),start_date,120) = '".$date."'");
+					$insert=$this->db->query("UPDATE tb_geoatt SET work = 1, end_date = CONVERT(varchar,GETDATE(),120), keterangan = '".$data_barang['keterangan']."' WHERE user_id =".$data['user_id']."AND convert(varchar(10),start_date,120) = '".$date."'");
 			
 				
 				if($insert){
@@ -443,6 +443,22 @@ ORDER BY start_date ASC
 					return false;
 				}
 			}
+		}
+
+		public function save_data_absensi_keluar($data){
+				$date=date("Y-m-d");
+
+				$data_barang['end_date']="".$date."		".$data['start_date']."";
+				$data_barang['keterangan']='nope';
+
+				$insert=$this->db->query("UPDATE tb_geoatt SET end_date = CONVERT(varchar,GETDATE(),120), keterangan = '".$data_barang['keterangan']."' , work = 0 WHERE user_id =".$data['user_id']."AND convert(varchar(10),start_date,120) = '".$date."'");
+			
+				
+				if($insert){
+					return true;
+				}else{
+					return true;
+				}
 		}
 		
 		public function save_data_absensi_ijin_cepat($data){

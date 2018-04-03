@@ -30,25 +30,40 @@ class Data_ijin extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_ijin/index.php');
-		$this->load->view('footer.php');
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_ijin/index.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+		
 	}
 	public function pengajuan_ijin_cepat()
 	{
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_ijin/pengajuan_ijin_cepat.php');
-		$this->load->view('footer.php');
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_ijin/pengajuan_ijin_cepat.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+		
 	}
 	
 		public function index_setuju()
 	{
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_ijin/index_setuju.php');
-		$this->load->view('footer.php');
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_ijin/index_setuju.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+		
 	}
 	
 	 public function total_ijin_setuju(){     //fungsi load_row untuk menampilkan jlh data pada navbar secara realtime
@@ -248,11 +263,15 @@ class Data_ijin extends CI_Controller {
 	
 	public function input_data_ijin()
 	{
-				
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_ijin/input_data_ijin.php');
-		$this->load->view('footer.php');
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_ijin/input_data_ijin.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+		
 	}
 	
 		public function save_data_ijin()

@@ -71,18 +71,28 @@ class Data_overtime extends CI_Controller {
 	
 	public function index()
 	{
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_overtime/index.php');
-		$this->load->view('footer.php');
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_overtime/index.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+		
 	}
 	
 	public function index_lembur_setuju()
 	{
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_overtime/index_lembur_setuju.php');
-		$this->load->view('footer.php');
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_overtime/index_lembur_setuju.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+		
 	}
 	
 	public function get_data_overtime($id_user=false){
@@ -133,11 +143,15 @@ class Data_overtime extends CI_Controller {
 	
 	public function input_data_overtime()
 	{
-				
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_overtime/input_data_overtime.php');
-		$this->load->view('footer.php');
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_overtime/input_data_overtime.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}		
+		
 	}
 	
 		public function get_data_overtime_approval($id_user=false){

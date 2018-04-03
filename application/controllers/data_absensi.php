@@ -70,19 +70,24 @@ class Data_absensi extends CI_Controller {
     }
 	
 	public function index()
-	{
-		$month=date('m');
+	{	
+		if($this->session->userdata('status_login_mandiri')){
+			$month=date('m');
 				$year=date('Y');
-		$data['data']=$this->master_model_user->data_master_user_absensi($this->session->userdata('id_user'));
-		for($i=0;$i<count($data['data']);$i++){
-			for($a=1;$a<=31;$a++){
-				$data['data'][$i]['data_absensi'][$a]=$this->master_model_absensi->data_master_absensi2($a,$month,$year,$this->session->userdata('id_user'));
+			$data['data']=$this->master_model_user->data_master_user_absensi($this->session->userdata('id_user'));
+			for($i=0;$i<count($data['data']);$i++){
+				for($a=1;$a<=31;$a++){
+					$data['data'][$i]['data_absensi'][$a]=$this->master_model_absensi->data_master_absensi2($a,$month,$year,$this->session->userdata('id_user'));
+				}
 			}
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_absensi/index.php',$data);
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
 		}
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_absensi/index.php',$data);
-		$this->load->view('footer.php');
+		
 		//$this->output->set_content_type('application/json')->set_output(json_encode($data));	
 	}
 	
@@ -265,20 +270,25 @@ class Data_absensi extends CI_Controller {
 	
 		public function index_admin()
 	{
-		$month=date('m');
-				$year=date('Y');
-		$data['data']=$this->master_model_user->data_master_user();
-		$data['search']=0;
-		for($i=0;$i<count($data['data']);$i++){
-			$enddate = date('t');
-			for($a=1;$a<=$enddate;$a++){
-				$data['data'][$i]['data_absensi'][$a]=$this->master_model_absensi->data_master_absensi2($a,$month,$year,$data['data'][$i]['id']);
+		if($this->session->userdata('status_login_mandiri')){
+			$month=date('m');
+			$year=date('Y');
+			$data['data']=$this->master_model_user->data_master_user();
+			$data['search']=0;
+			for($i=0;$i<count($data['data']);$i++){
+				$enddate = date('t');
+				for($a=1;$a<=$enddate;$a++){
+					$data['data'][$i]['data_absensi'][$a]=$this->master_model_absensi->data_master_absensi2($a,$month,$year,$data['data'][$i]['id']);
+				}
 			}
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_absensi/index_admin.php',$data);
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
 		}
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_absensi/index_admin.php',$data);
-		$this->load->view('footer.php');
+		
 		//$this->output->set_content_type('application/json')->set_output(json_encode($data));	
 	}
 	
@@ -366,6 +376,28 @@ class Data_absensi extends CI_Controller {
 				$this->output->set_content_type('application/json')->set_output(json_encode($data));
 			}
 	}
+
+	public function save_data_absensi_keluar()
+	{
+			$data_devisi=$_POST;
+	
+			$data_devisi_get=$this->master_model_absensi->save_data_absensi_keluar($data_devisi);
+			if($data_devisi_get){
+				$data['result']="Data Successfully Changes";
+				$data['status']	= true;
+				$data['is_logged_in']=true;
+				$data['cek_code']=true;
+				$data['dev']=$data_devisi_get;
+				$this->output->set_content_type('application/json')->set_output(json_encode($data));	
+			}else{
+				$data['result']="Data Gagal Diedit";
+				$data['status']	= false;
+				$data['is_logged_in']=false;
+				$data['cek_code']=false;
+				$this->output->set_content_type('application/json')->set_output(json_encode($data));
+			}
+	}
+
 	
 		public function save_data_absensi_ijin_cepat()
 	{
@@ -551,7 +583,7 @@ class Data_absensi extends CI_Controller {
 	public function status_absensi($id_user=false){
 			$data['data']=$this->master_model_absensi->get_status_absensi($id_user);
 			
-				if($data['data'][0]['total']  == 0){
+				if($data['data'][0]['work'] == 0){
 					$data['data'][0]['status_absensi']="Absen Masuk";
 				}else{
 					$data['data'][0]['status_absensi']="Absen Keluar";

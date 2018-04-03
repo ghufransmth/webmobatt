@@ -11,6 +11,7 @@
 			$this->load->library('session');
 			$this->load->model('master_model_data');
 			$this->load->model('master_model_user');
+
 		}
 		
 		public function index()
@@ -121,7 +122,7 @@
 				
 		}
 
-			public function logout()
+	public function logout()
 	{
 		//$this->session->sess_destroy();
 		 $this->session->unset_userdata('nama_user');
@@ -132,11 +133,11 @@
 		 $this->session->unset_userdata('user_level');
 		 $this->session->unset_userdata('atasan_1');
 		 $this->session->unset_userdata('atasan_2');
-		  $this->session->unset_userdata('status_user');
-		   $this->session->unset_userdata('status');
-		   $this->session->unset_userdata('gambar');
-		     $this->session->unset_userdata('nama_unit_kerja');
-		 redirect('./login/index');
+		 $this->session->unset_userdata('status_user');
+		 $this->session->unset_userdata('status');
+		 $this->session->unset_userdata('gambar');
+		 $this->session->unset_userdata('nama_unit_kerja');
+		 redirect('default_controller', 'refresh');
 	}
 
 	}

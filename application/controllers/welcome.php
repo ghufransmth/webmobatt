@@ -25,27 +25,31 @@ class Welcome extends CI_Controller {
 		$this->load->model('master_model_data_ijin');
 		$this->load->model('master_model_get_data');
 	$this->load->model('master_model_absensi');
-	if($this->session->userdata('status_login_mandiri')){
+	// if($this->session->userdata('status_login_mandiri')){
 			 
-		}else{
-			redirect('default_controller');
-		}
+	// 	}else{
+	// 		redirect('default_controller');
+	// 	}
 	}
 	
 
 		
 	public function index()
 	{
+		if($this->session->userdata('status_login_mandiri')){
 			$data['data']=$this->master_model_absensi->data_absensi_max();
-		for($i=0;$i<count($data['data']);$i++){
+			for($i=0;$i<count($data['data']);$i++){
 
-				//$data['data'][$i]['data_absensi']=$this->master_model_absensi->total_data_absensi($this->session->userdata('id_user'));
-			
-		}	
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('index.php',$data);
-		$this->load->view('footer.php');
+					//$data['data'][$i]['data_absensi']=$this->master_model_absensi->total_data_absensi($this->session->userdata('id_user'));
+				
+			}	
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('index.php',$data);
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
 		//$this->output->set_content_type('application/json')->set_output(json_encode($data));	
 	}
 	

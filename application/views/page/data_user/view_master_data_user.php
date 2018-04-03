@@ -50,7 +50,7 @@
 						<div class="box-body">
 							<div class="col-md-6" style="text-align:center">
 							
-								<img src="<?php echo base_url();?>/upload/foto_user/<?php echo $profile_image; ?>" style="width:200px;height:250px" class="img-circle" alt="User Image">	
+								<img src="<?php echo base_url();?>/upload/foto_user/<?php echo $profile_image; ?>" style="width:200px;height:200px;margin-bottom: 20px;" class="img-circle" alt="User Image">	
 								<input type="file" name="profile_image" class="form-control" id="profile_image" > <br />
 								<input type="hidden" name="id" id="id_user_set" class="form-control"  value="<?php echo $id; ?>"> <br />
 								

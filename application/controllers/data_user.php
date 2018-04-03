@@ -27,10 +27,15 @@ $this->load->model('master_model_data');
 
 	public function index()
 	{
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_user/index.php');
-		$this->load->view('footer.php');
+		if($this->session->userdata('status_login_mandiri')){
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_user/index.php');
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+		
 	}
 	public function get_data_user($id_user=false){
 			$data['data']=$this->master_model_user->data_master_user($id_user);
@@ -157,33 +162,38 @@ $this->load->model('master_model_data');
 	}
 	
 	public function view_profil($id_user=false)
-	{
+	{	
+		if($this->session->userdata('status_login_mandiri')){
 			$data['data']=$this->master_model_user->data_master_user($id_user);
-		for($i=0;$i<count($data['data']);$i++){
-				$data['data'][$i]['data_jabatan']=$this->master_model_user->data_jabatan($data['data'][$i]['nama_jabatan']);
-				if($data['data'][$i]['atasan_1'] == "-"){
-				$data['data'][$i]['data_jabatan_atasan']=array(array("nama_jabatan"=>"Tidak Ada Atasan","id_jabatan"=>"-"));		
+			for($i=0;$i<count($data['data']);$i++){
+					$data['data'][$i]['data_jabatan']=$this->master_model_user->data_jabatan($data['data'][$i]['nama_jabatan']);
+					if($data['data'][$i]['atasan_1'] == "-"){
+					$data['data'][$i]['data_jabatan_atasan']=array(array("nama_jabatan"=>"Tidak Ada Atasan","id_jabatan"=>"-"));		
+						
+					}else{
+					$data['data'][$i]['data_jabatan_atasan']=$this->master_model_user->data_jabatan($data['data'][$i]['atasan_1']);			
+						
+					}
 					
-				}else{
-				$data['data'][$i]['data_jabatan_atasan']=$this->master_model_user->data_jabatan($data['data'][$i]['atasan_1']);			
+					if($data['data'][$i]['atasan_2'] == "0"){
+					$data['data'][$i]['nama_jabatan_atasan']=array(array("first_name"=>"Top Level","id"=>"0"));		
+						
+					}else{
+					$data['data'][$i]['nama_jabatan_atasan']=$this->master_model_user->data_master_user($data['data'][$i]['atasan_2']);			
+						
+					}
 					
 				}
-				
-				if($data['data'][$i]['atasan_2'] == "0"){
-				$data['data'][$i]['nama_jabatan_atasan']=array(array("first_name"=>"Top Level","id"=>"0"));		
-					
-				}else{
-				$data['data'][$i]['nama_jabatan_atasan']=$this->master_model_user->data_master_user($data['data'][$i]['atasan_2']);			
-					
-				}
-				
-			}
-		
-		error_reporting(0);
-		$this->load->view('style.php');
-		$this->load->view('menu_header.php');
-		$this->load->view('page/data_user/view_master_data_user.php',$data);
-		$this->load->view('footer.php');
+			
+			error_reporting(0);
+			$this->load->view('style.php');
+			$this->load->view('menu_header.php');
+			$this->load->view('page/data_user/view_master_data_user.php',$data);
+			$this->load->view('footer.php');
+		}else{
+			redirect('default_controller');
+		}
+			
 		//$this->output->set_content_type('application/json')->set_output(json_encode($data));
 		
 	}
